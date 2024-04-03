@@ -13,12 +13,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Necessary for version tags
+          fetch-depth: 0
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: '8.0.x'  # Specify the .NET version
+          dotnet-version: '8.0.x'
 
       - name: Restore dependencies
         run: dotnet restore solution/mcronberg/cs/VideoPoker.sln
@@ -26,9 +26,8 @@ jobs:
       - name: Build and publish
         run: dotnet publish solution/mcronberg/cs/VideoPoker.sln -c Release -o ./publish --no-restore
 
-      - name: Create tag
-        run: echo "NEW_TAG=$(date +'%Y.%m.%d.%H%M%S')" >> $GITHUB_ENV
-        # This creates a tag in the format YYYY.MM.DD.HHMMSS
+      - name: Generate tag name
+        run: echo "NEW_TAG=$(date +'%Y-%m-%d-%H%M%S')" >> $GITHUB_ENV
 
       - name: Create Release
         id: create_release

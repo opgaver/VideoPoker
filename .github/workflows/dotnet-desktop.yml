@@ -1,5 +1,7 @@
 name: Build and Release .NET Application
-
+permissions:
+  contents: write
+  actions: write
 on:
   push:
     branches:
@@ -41,8 +43,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./publish/VidoePoker.exe  # Update with your actual executable name
-          asset_name: VidoePoker.exe
+          asset_path: ./publish/VideoPoker.exe  # Update with your actual executable name
+          asset_name: VideoPoker.exe
           asset_content_type: application/octet-stream
 
       # Optional: Increment version number here. You might need a custom script or action to do this.

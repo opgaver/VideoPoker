@@ -25,4 +25,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: VideoPoker
-        path: solution/mcronberg/cs/VideoPoker/bin/Release/VideoPoker.exe
+        path: D:\a\VideoPoker\VideoPoker\solution\mcronberg\cs\VideoPoker.ConsoleApp\bin\Release\net7.0\VideoPoker.ConsoleApp.exe

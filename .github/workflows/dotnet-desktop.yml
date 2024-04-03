@@ -24,14 +24,15 @@ jobs:
       - name: Build and publish
         run: dotnet publish solution/mcronberg/cs/VideoPoker.sln -c Release -o ./publish --no-restore
 
-      # Directly creating a new tag and using it for the release name and tag name
       - name: Generate and set tag
         id: set_tag
+        shell: pwsh # Specify PowerShell as the shell
         run: |
-          NEW_TAG=$(date +'%Y-%m-%d-%H%M%S')
-          echo "::set-output name=tag::${NEW_TAG}"
+          $NEW_TAG = Get-Date -Format "yyyy-MM-dd-HHmmss"
+          echo "::set-output name=tag::$NEW_TAG"
           git tag $NEW_TAG
           git push origin $NEW_TAG
+
 
       - name: Create Release
         id: create_release

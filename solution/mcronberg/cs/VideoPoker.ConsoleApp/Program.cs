@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 
 using VideoPoker.Core;
 
+
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
 Console.WriteLine(File.ReadAllText("welcome.txt"));

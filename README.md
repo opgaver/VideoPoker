@@ -9,3 +9,5 @@ Der er helt frit valg i måden at udvikle spillet på, men det skal som udgangsp
 Her er [en video der viser min implementation](https://s3.eu-west-1.amazonaws.com/media.cronberg.dk/cs/niveau3/videopoker.mp4) (prøv den selv eventuelt under /solution).
 
 [![](video.png)](https://s3.eu-west-1.amazonaws.com/media.cronberg.dk/cs/niveau3/videopoker.mp4)
+
+Du kan også hente en kompileret version under [Releases](https://github.com/opgaver/VideoPoker/releases).

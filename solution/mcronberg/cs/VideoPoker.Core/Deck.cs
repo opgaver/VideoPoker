@@ -10,7 +10,7 @@ namespace VideoPoker.Core
     public class Deck : IEnumerable<Card>
     {
        
-        protected List<Card> cards = new();
+        protected IList<Card> cards = new List<Card>();
 
         public Card Peek(int index)
         {
@@ -36,9 +36,9 @@ namespace VideoPoker.Core
         public void Shuffle()
         {
             var random = new Random();
-            var cards = this.cards.ToArray();
+            Card[] c = [.. this.cards];
             this.cards.Clear();
-            foreach (var card in cards.OrderBy(c => random.Next()))
+            foreach (var card in c.OrderBy(c => random.Next()))
             {
                 this.cards.Add(card);
             }
@@ -61,7 +61,7 @@ namespace VideoPoker.Core
             return card;
         }
 
-        public virtual List<Card> DealCards(int count)
+        public virtual IList<Card> DealCards(int count)
         {
             if (cards.Count < count)
             {
@@ -115,7 +115,7 @@ namespace VideoPoker.Core
             {
                 if (index < 0 || index >= cards.Count)
                 {
-                    throw new IndexOutOfRangeException();
+                    throw new Exception("Error in reading cards", new IndexOutOfRangeException());
                 }
                 return cards[index];
             }
@@ -123,7 +123,7 @@ namespace VideoPoker.Core
             {
                 if (index < 0 || index >= cards.Count)
                 {
-                    throw new IndexOutOfRangeException();
+                    throw new Exception("Error in reading cards", new IndexOutOfRangeException());
                 }
                 cards[index] = value;
             }

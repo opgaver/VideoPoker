@@ -113,7 +113,7 @@
         {
             get
             {
-                return cards.TrueForAll(card => card.Suit == cards[0].Suit);
+                return cards.ToList().TrueForAll(card => card.Suit == cards[0].Suit);
             }
         }
 
@@ -145,7 +145,7 @@
         {
             get
             {
-                return IsFlush && IsStraight && cards.Exists(card => card.Rank == CardValue.Ace);
+                return IsFlush && IsStraight && cards.ToList().Exists(card => card.Rank == CardValue.Ace);
             }
         }
 

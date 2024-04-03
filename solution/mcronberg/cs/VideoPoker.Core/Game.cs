@@ -26,7 +26,7 @@ namespace VideoPoker.Core
             this.deck = Deck.CreateDeck();
             this.deck.Shuffle();
             this.deck.Flip();
-            hand = new PokerHand(deck.DealCards(5));
+            hand = new PokerHand(deck.DealCards(5).ToList());
 
         }
         public Prize SecondDraw(int[] holds)

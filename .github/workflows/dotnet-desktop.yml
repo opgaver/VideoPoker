@@ -1,0 +1,28 @@
+name: Build Windows Executable
+
+on:
+  push:
+    branches:
+      - main # Change this to your main branch name
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.0.3
+
+    - name: Restore NuGet packages
+      run: nuget restore solution/mcronberg/cs/VideoPoker.sln
+      
+    - name: Build
+      run: msbuild /p:Configuration=Release solution/mcronberg/cs/VideoPoker.sln
+      
+    - name: Upload Exe
+      uses: actions/upload-artifact@v2
+      with:
+        name: VideoPoker
+        path: solution/mcronberg/cs/VideoPoker/bin/Release/VideoPoker.exe

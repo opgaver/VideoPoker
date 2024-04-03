@@ -39,7 +39,7 @@ jobs:
           git push origin $NEW_TAG
 
       - name: Zip Application Files
-        run: Compress-Archive -Path ./publish/VideoPoker.ConsoleApp.exe, ./publish/VideoPoker.Core.dll -DestinationPath ./publish/VideoPokerRelease.zip
+        run: Compress-Archive -Path ./publish/VideoPoker.ConsoleApp.exe, ./publish/VideoPoker.ConsoleApp.dll, ./publish/VideoPoker.Core.dll -DestinationPath ./publish/VideoPokerRelease.zip
         shell: pwsh
 
       - name: Create Release

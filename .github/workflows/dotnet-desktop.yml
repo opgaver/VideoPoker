@@ -1,44 +1,48 @@
-name: Build Windows Executable and Create Release
+name: Build and Release .NET Application
 
 on:
   push:
     branches:
-      - main # Change this to your main branch name
+      - main  # Or your default branch
 
 jobs:
-  build:
+  build-and-release:
     runs-on: windows-latest
-
     steps:
-    - uses: actions/checkout@v2
-      
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1.0.3
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Necessary for version tags
 
-    - name: Restore NuGet packages
-      run: nuget restore solution/mcronberg/cs/VideoPoker.sln
-      
-    - name: Build
-      run: msbuild /p:Configuration=Release solution/mcronberg/cs/VideoPoker.sln
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '8.0.x'  # Specify the .NET version
 
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: v1.0.0 # Change this to the desired tag name
-        release_name: Release v1.0.0 # Change this to the desired release name
-        draft: false
-        prerelease: false
+      - name: Restore dependencies
+        run: dotnet restore solution/mcronberg/cs/VideoPoker.sln
 
-    - name: Upload Exe to Release
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: D:\a\VideoPoker\VideoPoker\solution\mcronberg\cs\VideoPoker.ConsoleApp\bin\Release\net7.0\VideoPoker.ConsoleApp.exe
-        asset_name: VideoPoker.exe
-        asset_content_type: application/octet-stream
-        
+      - name: Build and publish
+        run: dotnet publish solution/mcronberg/cs/VideoPoker.sln -c Release -o ./publish --no-restore
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./publish/VidoePoker.exe  # Update with your actual executable name
+          asset_name: VidoePoker.exe
+          asset_content_type: application/octet-stream
+
+      # Optional: Increment version number here. You might need a custom script or action to do this.

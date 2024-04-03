@@ -31,13 +31,16 @@ jobs:
 
       - name: Generate and set tag
         id: set_tag
-        shell: pwsh # Specify PowerShell as the shell
+        shell: pwsh
         run: |
           $NEW_TAG = Get-Date -Format "yyyy-MM-dd-HHmmss"
           echo "::set-output name=tag::$NEW_TAG"
           git tag $NEW_TAG
           git push origin $NEW_TAG
 
+      - name: Zip Application Files
+        run: Compress-Archive -Path ./publish/VideoPoker.ConsoleApp.exe, ./publish/VideoPoker.Core.dll -DestinationPath ./publish/VideoPokerRelease.zip
+        shell: pwsh
 
       - name: Create Release
         id: create_release
@@ -56,6 +59,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./publish/VideoPoker.ConsoleApp.exe
-          asset_name: VideoPoker.ConsoleApp.exe
-          asset_content_type: application/octet-stream
+          asset_path: ./publish/VideoPokerRelease.zip
+          asset_name: VideoPokerRelease.zip
+          asset_content_type: application/zip

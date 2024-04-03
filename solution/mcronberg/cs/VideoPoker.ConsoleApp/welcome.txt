@@ -1,0 +1,57 @@
+Welcome to Video Poker
+----------------------
+
+This is a simple implementation of the classic Video Poker game 'Jacks or Better'. 
+The goal of the game is to get a hand containing at least a pair of Jacks or better 
+to win. The game starts with the player being dealt five cards from a standard 
+52-card deck. The player then has the option to 'hold' any of the five cards and 
+discard the rest. The discarded cards are replaced with new ones from the same 
+deck, constituting the final hand of the player. The player's final hand is then 
+evaluated, and if it contains a pair of Jacks or a higher-ranking poker hand 
+(like two pairs, three of a kind, straight, flush, full house, four of a kind, 
+straight flush, or royal flush), they receive a payout according to the 
+game's paytable. The simplicity of 'Jacks or Better' makes it an ideal introduction 
+to the strategy and fun of Video Poker. Read more about the game at 
+https://en.wikipedia.org/wiki/Video_poker#Jacks_or_Better.
+
+In this 'Jacks or Better' Video Poker game, you start with $25. The unique twist is 
+that you can only bet $5 per hand, making each decision crucial. You aim to build a hand 
+of at least a pair of Jacks to win. If your hand doesn't meet this threshold, you lose 
+your bet. Winning hands pay out according to the game's paytable, adding to your balance. 
+The game ends when you run out of money, so strategic play and careful betting are key to 
+prolonging the game and maximizing potential winnings.
+
+Here is the game's paytable:
+
++------------------+------+------+------+------+------+
+| Winning Hand     | $1   | $2   | $3   | $4   | $5   |
++------------------+------+------+------+------+------+
+| Royal Flush      | 250  | 500  | 750  | 1000 | 4000 |
+| Straight Flush   | 50   | 100  | 150  | 200  | 250  |
+| Four of a Kind   | 25   | 50   | 75   | 100  | 125  |
+| Full House       | 9    | 18   | 27   | 36   | 45   |
+| Flush            | 6    | 12   | 18   | 24   | 30   |
+| Straight         | 4    | 8    | 12   | 16   | 20   |
+| Three of a Kind  | 3    | 6    | 9    | 12   | 15   |
+| Two Pair         | 2    | 4    | 6    | 8    | 10   |
+| Jacks or Better  | 1    | 2    | 3    | 4    | 5    |
++------------------+------+------+------+------+------+
+
+Below is a table showcasing examples of each type of winning hand in "Jacks or Better" 
+Video Poker (S for Spades, H for Hearts, D for Diamonds, and C for Clubs):
+
++------------------+-------------------------------+
+| Winning Hand     | Example Hand                  |
++------------------+-------------------------------+
+| Royal Flush      | 10S, JS, QS, KS, AS           |
+| Straight Flush   | 5H, 6H, 7H, 8H, 9H            |
+| Four of a Kind   | 9C, 9D, 9H, 9S, 3D            |
+| Full House       | 2C, 2D, 2S, 3H, 3S            |
+| Flush            | 2D, 4D, 6D, 8D, JD            |
+| Straight         | 3C, 4H, 5S, 6D, 7H            |
+| Three of a Kind  | 7C, 7D, 7S, 9C, JD            |
+| Two Pair         | 4H, 4S, 6D, 6S, 8H            |
+| Jacks or Better  | JC, JD, 3H, 7S, 10D           |
++------------------+-------------------------------+
+
+Press any key to start the game - good luck.

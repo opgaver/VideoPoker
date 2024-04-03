@@ -12,8 +12,6 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v2
@@ -26,8 +24,14 @@ jobs:
       - name: Build and publish
         run: dotnet publish solution/mcronberg/cs/VideoPoker.sln -c Release -o ./publish --no-restore
 
-      - name: Generate tag name
-        run: echo "NEW_TAG=$(date +'%Y-%m-%d-%H%M%S')" >> $GITHUB_ENV
+      # Directly creating a new tag and using it for the release name and tag name
+      - name: Generate and set tag
+        id: set_tag
+        run: |
+          NEW_TAG=$(date +'%Y-%m-%d-%H%M%S')
+          echo "::set-output name=tag::${NEW_TAG}"
+          git tag $NEW_TAG
+          git push origin $NEW_TAG
 
       - name: Create Release
         id: create_release
@@ -35,8 +39,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ env.NEW_TAG }}
-          release_name: Release ${{ env.NEW_TAG }}
+          tag_name: ${{ steps.set_tag.outputs.tag }}
+          release_name: Release ${{ steps.set_tag.outputs.tag }}
           draft: false
           prerelease: false
 

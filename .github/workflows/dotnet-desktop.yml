@@ -22,7 +22,7 @@ jobs:
         run: dotnet restore solution/mcronberg/cs/VideoPoker.sln
 
       - name: Build and publish
-        run: dotnet publish solution/mcronberg/cs/VideoPoker.sln -c Release -o ./publish --no-restore
+        run: dotnet publish solution/mcronberg/cs/VideoPoker.ConsoleApp/VideoPoker.ConsoleApp.csproj -c Release -o ./publish --no-restore
 
       - name: Generate and set tag
         id: set_tag
